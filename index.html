@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projeto de ciência de dados para analisar padrões de qualidade de vida da turma.">
+    <title>DataVida | Qualidade de Vida da Turma</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="topbar">
+        <a href="#" class="logo">
+            <span class="logo-icon">✳</span>
+            DataVida
+        </a>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#indicadores">Indicadores</a>
+            <a href="#analise">Análises</a>
+            <a href="#cadastro">Adicionar dados</a>
+        </nav>
+        <span class="status"><span></span> Projeto acadêmico</span>
+    </header>
+
+    <main class="container">
+
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <span class="eyebrow">CIÊNCIA DE DADOS • EDUCAÇÃO</span>
+                <h1>O que os dados revelam sobre a <span>qualidade de vida da turma?</span></h1>
+                <p>
+                    Analisamos hábitos de sono, atividade física, estresse e bem-estar
+                    para identificar padrões e estimar tendências de qualidade de vida.
+                </p>
+                <a href="#analise" class="btn-primary">Explorar análises ↗</a>
+                <p class="hero-note">Dados demonstrativos e anônimos para fins educacionais.</p>
+            </div>
+
+            <div class="hero-visual" aria-label="Ilustração de análise de dados">
+                <div class="visual-circle circle-one"></div>
+                <div class="visual-circle circle-two"></div>
+                <div class="visual-card">
+                    <span class="visual-label">Índice de bem-estar</span>
+                    <div class="visual-number" id="heroScore">76<span>/100</span></div>
+                    <div class="mini-bars">
+                        <i style="height: 40%"></i>
+                        <i style="height: 65%"></i>
+                        <i style="height: 52%"></i>
+                        <i style="height: 82%"></i>
+                        <i style="height: 70%"></i>
+                        <i style="height: 95%"></i>
+                        <i style="height: 76%"></i>
+                    </div>
+                    <span class="visual-footer">Indicador ilustrativo</span>
+                </div>
+                <div class="floating-tag">✦ Dados + conhecimento</div>
+            </div>
+        </section>
+
+        <section class="section" id="indicadores">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">VISÃO GERAL</span>
+                    <h2>Indicadores da turma</h2>
+                    <p>Resumo calculado a partir dos registros disponíveis.</p>
+                </div>
+                <span class="updated" id="totalRecords">20 registros de exemplo</span>
+            </div>
+
+            <div class="metrics-grid">
+                <article class="metric-card">
+                    <div class="metric-top">
+                        <span>Qualidade de vida</span>
+                        <span class="metric-icon purple">✳</span>
+                    </div>
+                    <div class="metric-value"><span id="avgScore">76</span><small>/100</small></div>
+                    <p id="scoreDescription">Índice médio estimado</p>
+                    <div class="progress"><span id="scoreProgress" style="width: 76%"></span></div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-top">
+                        <span>Sono médio</span>
+                        <span class="metric-icon blue">◷</span>
+                    </div>
+                    <div class="metric-value"><span id="avgSleep">7,2</span><small> h/noite</small></div>
+                    <p>Média de horas dormidas</p>
+                    <div class="progress blue-progress"><span id="sleepProgress" style="width: 72%"></span></div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-top">
+                        <span>Atividade física</span>
+                        <span class="metric-icon green">↗</span>
+                    </div>
+                    <div class="metric-value"><span id="avgExercise">3,5</span><small> dias/semana</small></div>
+                    <p>Frequência média semanal</p>
+                    <div class="progress green-progress"><span id="exerciseProgress" style="width: 50%"></span></div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-top">
+                        <span>Estresse médio</span>
+                        <span class="metric-icon orange">◎</span>
+                    </div>
+                    <div class="metric-value"><span id="avgStress">4,2</span><small>/10</small></div>
+                    <p>Escala de 0 a 10</p>
+                    <div class="progress orange-progress"><span id="stressProgress" style="width: 42%"></span></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="analise">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">EXPLORAÇÃO DE DADOS</span>
+                    <h2>Descobrindo padrões</h2>
+                    <p>Compare hábitos e observe como os indicadores variam.</p>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <article class="panel chart-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Hábitos e qualidade de vida</h3>
+                            <p>Comparação entre médias da turma</p>
+                        </div>
+                        <span class="chart-badge">Visão geral</span>
+                    </div>
+                    <div class="chart-wrap">
+                        <canvas id="habitsChart"></canvas>
+                    </div>
+                </article>
+
+                <article class="panel chart-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Níveis de bem-estar</h3>
+                            <p>Distribuição dos registros</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrap doughnut-wrap">
+                        <canvas id="wellbeingChart"></canvas>
+                    </div>
+                    <div class="legend-list">
+                        <span><i class="dot dot-green"></i> Alto</span>
+                        <span><i class="dot dot-yellow"></i> Moderado</span>
+                        <span><i class="dot dot-red"></i> Baixo</span>
+                    </div>
+                </article>
+            </div>
+
+            <article class="panel insights-panel">
+                <div class="insight-symbol">✦</div>
+                <div>
+                    <span class="eyebrow">INSIGHTS AUTOMÁTICOS</span>
+                    <h3>O que podemos aprender com os dados?</h3>
+                    <p id="insightText">As análises aparecerão aqui após o processamento dos registros.</p>
+                    <p class="disclaimer">
+                        Os resultados mostram associações e estimativas, não provam causa e efeito.
+                    </p>
+                </div>
+            </article>
+
+            <div class="section-heading prediction-heading">
+                <div>
+                    <span class="eyebrow">ANÁLISE PREDITIVA</span>
+                    <h2>Estimativa de bem-estar</h2>
+                    <p>Simule diferentes hábitos e observe a pontuação estimada.</p>
+                </div>
+            </div>
+
+            <div class="prediction-grid">
+                <article class="panel form-panel">
+                    <h3>Simulador de hábitos</h3>
+                    <p class="panel-description">Ajuste os valores para simular um perfil hipotético.</p>
+
+                    <form id="predictionForm">
+                        <div class="field">
+                            <label for="sleepInput">Horas de sono por noite</label>
+                            <div class="range-line">
+                                <input type="range" id="sleepInput" min="0" max="12" step="0.5" value="7" required>
+                                <output id="sleepOutput">7 h</output>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="exerciseInput">Atividade física (dias por semana)</label>
+                            <div class="range-line">
+                                <input type="range" id="exerciseInput" min="0" max="7" step="1" value="3" required>
+                                <output id="exerciseOutput">3 dias</output>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="stressInput">Nível de estresse (0 a 10)</label>
+                            <div class="range-line">
+                                <input type="range" id="stressInput" min="0" max="10" step="1" value="4" required>
+                                <output id="stressOutput">4/10</output>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="moodInput">Bem-estar percebido (0 a 10)</label>
+                            <div class="range-line">
+                                <input type="range" id="moodInput" min="0" max="10" step="1" value="7" required>
+                                <output id="moodOutput">7/10</output>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary full-button">Calcular estimativa ↗</button>
+                    </form>
+                </article>
+
+                <article class="panel prediction-result">
+                    <span class="eyebrow">RESULTADO DA SIMULAÇÃO</span>
+                    <div class="score-circle" id="scoreCircle">
+                        <div>
+                            <strong id="predictionScore">76</strong>
+                            <span>de 100</span>
+                        </div>
+                    </div>
+                    <h3 id="predictionLabel">Bem-estar moderado</h3>
+                    <p id="predictionDescription">
+                        Ajuste os hábitos para explorar diferentes cenários.
+                    </p>
+                    <div class="result-details">
+                        <div>
+                            <span>Perfil analisado</span>
+                            <strong>Hipotético</strong>
+                        </div>
+                        <div>
+                            <span>Método</span>
+                            <strong>Modelo de pontuação</strong>
+                        </div>
+                    </div>
+                    <p class="disclaimer">
+                        Esta pontuação é ilustrativa e não representa diagnóstico médico nem previsão validada.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="cadastro">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">COLETA DE DADOS</span>
+                    <h2>Adicionar um registro</h2>
+                    <p>Inclua dados fictícios ou anonimizados para atualizar as análises.</p>
+                </div>
+            </div>
+
+            <article class="panel form-panel">
+                <form id="recordForm">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="studentId">Código anônimo</label>
+                            <input id="studentId" type="text" placeholder="Ex.: A21" maxlength="20" required>
+                        </div>
+                        <div class="field">
+                            <label for="recordSleep">Sono (horas/noite)</label>
+                            <input id="recordSleep" type="number" min="0" max="12" step="0.5" value="7" required>
+                        </div>
+                        <div class="field">
+                            <label for="recordExercise">Atividade física (dias/semana)</label>
+                            <input id="recordExercise" type="number" min="0" max="7" step="1" value="3" required>
+                        </div>
+                        <div class="field">
+                            <label for="recordStress">Estresse (0 a 10)</label>
+                            <input id="recordStress" type="number" min="0" max="10" step="1" value="4" required>
+                        </div>
+                        <div class="field">
+                            <label for="recordMood">Bem-estar percebido (0 a 10)</label>
+                            <input id="recordMood" type="number" min="0" max="10" step="1" value="7" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Adicionar registro +</button>
+                    <button type="button" class="btn-secondary" id="resetButton">Restaurar exemplos</button>
+                    <p class="form-message" id="formMessage" role="status"></p>
+                </form>
+            </article>
+
+            <article class="panel table-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Registros da turma</h3>
+                        <p>Os dados são mantidos somente nesta sessão do navegador.</p>
+                    </div>
+                    <button id="exportButton" class="btn-secondary" type="button">Exportar CSV ↓</button>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Sono</th>
+                                <th>Exercício</th>
+                                <th>Estresse</th>
+                                <th>Bem-estar</th>
+                                <th>Índice</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsTable"></tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+
+        <section class="methodology">
+            <span class="eyebrow">METODOLOGIA</span>
+            <h2>Como os dados são analisados?</h2>
+            <div class="method-grid">
+                <div>
+                    <span>01</span>
+                    <h3>Coleta</h3>
+                    <p>Registrar hábitos por meio de dados anônimos ou fictícios.</p>
+                </div>
+                <div>
+                    <span>02</span>
+                    <h3>Preparação</h3>
+                    <p>Validar os valores e calcular médias e indicadores.</p>
+                </div>
+                <div>
+                    <span>03</span>
+                    <h3>Análise</h3>
+                    <p>Comparar os indicadores e observar padrões na turma.</p>
+                </div>
+                <div>
+                    <span>04</span>
+                    <h3>Estimativa</h3>
+                    <p>Simular cenários com um modelo didático de pontuação.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <a href="#inicio" class="logo"><span class="logo-icon">✳</span> DataVida</a>
+        <p>Projeto educacional de Ciência de Dados • Qualidade de Vida da Turma</p>
+        <p>Dados demonstrativos. Preserve a privacidade de todos.</p>
+    </footer>
+
+</body>
+</html>
